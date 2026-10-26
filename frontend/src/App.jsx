@@ -1,20 +1,58 @@
-// Seed do componente raiz do Document Management System.
-//
-// Este é apenas um ponto de partida mínimo. Durante o Passo 3 você vai usar o
-// Agent Mode do GitHub Copilot para construir os componentes:
-//   - components/UploadComponent
-//   - components/DocumentList
-//   - components/DownloadButton
-// e o serviço services/ que consome a API do backend via fetch.
+import { useState } from 'react';
+import UploadComponent from './components/UploadComponent/UploadComponent.jsx';
+import DocumentList from './components/DocumentList/DocumentList.jsx';
+import './App.css';
+
+function DocumentsWorkspace({ userId }) {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  return (
+    <>
+      <UploadComponent
+        userId={userId}
+        onUploaded={() => setRefreshKey((current) => current + 1)}
+      />
+      <DocumentList userId={userId} refreshKey={refreshKey} />
+    </>
+  );
+}
 
 export default function App() {
+  const [userInput, setUserInput] = useState('');
+  const [userId, setUserId] = useState('');
+
+  function handleUserSubmit(event) {
+    event.preventDefault();
+    setUserId(userInput.trim());
+  }
+
   return (
-    <main style={{ fontFamily: 'system-ui, sans-serif', padding: '2rem' }}>
-      <h1>Document Management System</h1>
-      <p>
-        Seed do frontend. Construa a interface durante o Passo 3 usando o Agent
-        Mode do GitHub Copilot.
-      </p>
+    <main className="app-shell">
+      <header className="app-header">
+        <p className="app-brand">DMS</p>
+        <h1>Gestão de documentos</h1>
+      </header>
+      <form className="user-form" onSubmit={handleUserSubmit}>
+        <label htmlFor="user-id">
+          Identificador do usuário
+          <input
+            id="user-id"
+            type="text"
+            value={userInput}
+            onChange={(event) => setUserInput(event.target.value)}
+            required
+          />
+        </label>
+        <button type="submit" disabled={!userInput.trim() || userInput.trim() === userId}>
+          {userId ? 'Trocar usuário' : 'Abrir documentos'}
+        </button>
+      </form>
+      {userId && (
+        <div>
+          <p className="active-user">Usuário atual: <strong>{userId}</strong></p>
+          <DocumentsWorkspace key={userId} userId={userId} />
+        </div>
+      )}
     </main>
   );
 }

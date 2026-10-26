@@ -1,0 +1,61 @@
+:root {
+  font-family: 'Segoe UI', sans-serif;
+  color: #243230;
+  background: #f5f7f6;
+  font-synthesis: none;
+  line-height: 1.5;
+  --accent: #17664d;
+  --border: #d4ded9;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+button, input { border: 1px solid var(--border); border-radius: 4px; }
+button {
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+button:hover:not(:disabled) { filter: brightness(0.92); }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+:focus-visible { outline: 3px solid #ba6c25; outline-offset: 3px; }
+input { min-width: 0; width: 100%; padding: 0.6rem; background: #fff; }
+input[type='file'] { padding: 0.4rem; }
+input::file-selector-button { font: inherit; padding: 0.35rem 0.65rem; margin-right: 0.75rem; }
+label { display: grid; gap: 0.4rem; font-weight: 600; min-width: 0; }
+h1, h2, h3, p { margin: 0; overflow-wrap: anywhere; }
+h1 { font-size: 2rem; font-weight: 600; }
+h2 { font-size: 1.2rem; font-weight: 600; }
+h3 { font-size: 1rem; font-weight: 600; }
+.app-shell { width: min(100% - 3rem, 960px); margin: 2.5rem auto; }
+.app-header { padding-bottom: 1.5rem; border-bottom: 3px solid var(--accent); }
+.app-brand { font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+.user-form, .upload-form { display: flex; align-items: end; gap: 1rem; }
+.user-form { padding: 1.5rem 0; }
+.user-form label { flex: 1; max-width: 380px; }
+.active-user { color: #53635e; padding-bottom: 1rem; }
+.upload-section, .documents-section { border-top: 1px solid var(--border); padding: 1.5rem 0; }
+.upload-form { margin-top: 1rem; }
+.file-field { flex: 1; }
+.section-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.secondary-button { color: var(--accent); background: #fff; }
+.document-list { list-style: none; padding: 0; margin: 0; }
+.document-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--border); }
+.document-details { min-width: 0; }
+.document-details p { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin-top: 0.25rem; color: #53635e; font-size: 0.9rem; }
+.download-action { max-width: 45%; }
+.error-message { margin-top: 0.75rem; color: #a32532; }
+.success-message { color: var(--accent); margin-top: 0.75rem; }
+.empty-state { padding: 1.5rem 0; color: #53635e; }
+
+@media (max-width: 560px) {
+  .app-shell { width: calc(100% - 2rem); margin: 1.5rem auto; }
+  h1 { font-size: 1.6rem; }
+  .user-form, .upload-form { align-items: stretch; flex-direction: column; }
+  .user-form label { max-width: none; }
+  .document-row { align-items: start; }
+}
